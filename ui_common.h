@@ -1,6 +1,7 @@
 #ifndef UI_COMMON__H
 #define UI_COMMON__H
 
+#include "ArxTypeTraits.h"
 #include "button.h"
 
 class Application
@@ -10,6 +11,8 @@ public:
 
 	virtual void onRotarySW(RotarySwitch::RSW_DIR dir) = 0;
 	virtual void onButton(int state) = 0;
+
+	virtual void get_app_msg(char *, size_t) {};
 
 	void register_update();
 	bool should_update() const;
@@ -80,7 +83,7 @@ private:
 
 struct Menu_Back : Menu
 {
-	Menu_Back(const char *title, const MenuApp *const app)
+	Menu_Back(const char *title, MenuApp *app)
 		: Menu(title), app(app)
 	{}
 	void exec() override;
